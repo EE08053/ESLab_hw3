@@ -26,18 +26,17 @@ class MyDelegate(DefaultDelegate):
             print str(val)
 
 def enable_notify(ch):
-        setup_data = b"\x01\x00"
-        notify_handle = ch.getHandle() + 1
-        res = dev.writeCharacteristic(notify_handle, setup_data, withResponse=True)
-        print(res)
+    setup_data = b"\x01\x00"
+    notify_handle = ch.getHandle() + 1
+    res = dev.writeCharacteristic(notify_handle, setup_data, withResponse=True)
+    print(res)
 
 def enable_indication(ch):
-        setup_data = b"\x02\x00"
-        indicate_handle = ch.getHandle() + 1
-        res = dev.writeCharacteristic(indicate_handle, setup_data, withResponse=True)
-        print(res)
+    setup_data = b"\x02\x00"
+    indicate_handle = ch.getHandle() + 1
+    res = dev.writeCharacteristic(indicate_handle, setup_data, withResponse=True)
+    print(res)
 
-    
 scanner = Scanner().withDelegate(ScanDelegate())
 devices = scanner.scan(20.0)
 n = 0
@@ -61,7 +60,6 @@ print("Services...")
 for svc in dev.services:
     print(str(svc))
 
-#handle 59 62 65
 try:
     BPService = dev.getServiceByUUID(UUID(0x1810))
     
@@ -71,10 +69,8 @@ try:
         print("properties: "+ ch.propertiesToString())
        
     print("\ncharacteristic data : ")
-    
     for ch in BPService.getCharacteristics():
         print(str(ch))
-
         if (ch.supportsRead()):
             print("READ: "+ ch.read())
 
@@ -102,7 +98,6 @@ try:
                     break
                 else:
                     print("no indication")
-
 
 finally:
     dev.disconnect
